@@ -1,18 +1,33 @@
 public class Scoreblad extends Score {
 
-    private int subtotaalBoven;
-    private int bonusBoven;
-    private int totaalBoven;
+    int subtotaalBoven;
+    int bonusBoven;
+    int totaalBoven;
 
-    private int subtotaalOnder;
-    private int totaalOnder;
-    private int grandTotal;
+    int totaalOnder;
+    int totaalGeneraal;
 
-    // bereken alle (sub) totaliseringen
-    void bereken(){
+    int resetWaarde = -1;
 
+    Scoreblad() {
+        reset(-1);
     }
 
+    @Override
+    void reset() {
+        reset(-1);
+    }
+
+    // bereken alle (sub) totaliseringen
+    void bereken() {
+
+        subtotaalBoven = enen + tweeen + drieen + vieren + vijfen + zessen;
+        bonusBoven = subtotaalBoven >= 63 ? 35 : 0;
+        totaalBoven = subtotaalBoven + bonusBoven;
+
+        totaalOnder = threeOfAKind + carre + fullHouse + kleineStraat + groteStraat + yahtzee + chance;
+        totaalGeneraal = totaalBoven + totaalOnder;
+    }
 
 
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Speler {
@@ -36,68 +37,85 @@ public class Speler {
         return actie == 'J';
     }
 
+    boolean isGeldigeNotatie(Scoreblad scoreblad, String letter) {
+
+        // maak lijst van nog niet-gescoorde items
+        ArrayList<Character> validList = new ArrayList<>();
+        if (scoreblad.enen == -1) validList.add('1');
+        if (scoreblad.tweeen == -1) validList.add('2');
+        if (scoreblad.drieen == -1) validList.add('3');
+        if (scoreblad.vieren == -1) validList.add('4');
+        if (scoreblad.vijfen == -1) validList.add('5');
+        if (scoreblad.zessen == -1) validList.add('6');
+        if (scoreblad.threeOfAKind == -1) validList.add('t');
+        if (scoreblad.carre == -1) validList.add('c');
+        if (scoreblad.fullHouse == -1) validList.add('f');
+        if (scoreblad.kleineStraat == -1) validList.add('k');
+        if (scoreblad.groteStraat == -1) validList.add('g');
+        if (scoreblad.yahtzee == -1) validList.add('y');
+        if (scoreblad.chance == -1) validList.add('z');
+
+        return validList.indexOf(letter.toLowerCase().charAt(0)) >= 0 ? true : false;
+
+    }
+
     String getNaam() {
         return naam;
     }
 
     void noteerScore(Score score, Scoreblad scoreblad) { //todo: only allow assignments to 0 fields
+
         Scanner input = new Scanner(System.in);
-        System.out.printf("\nWelke score wil je noteren? Kies uit 1 t/m 13: ");
+        System.out.printf("\nKies welke worp je wilt noteren: ");
         String line;
-        int keuze = 0;
+        char keuze = '-';
         do {
-            try {
-                keuze = Integer.valueOf(input.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.printf("\tOngeldige invoer, probeer opnieuw\n");
-                continue;
-            }
-            if (keuze >= 1 && keuze <= 13) {
-                break;
+            line = input.nextLine();
+            if (line.length() > 0 && isGeldigeNotatie(scoreblad, line)) {
+                keuze = line.toLowerCase().charAt(0);
             } else {
                 System.out.printf("\tOngeldige invoer, probeer opnieuw\n");
-                continue;
             }
-        } while (true);
+        } while (keuze == '-');
 
         switch (keuze) {
-            case 1:
+            case '1':
                 scoreblad.enen = score.enen;
                 break;
-            case 2:
+            case '2':
                 scoreblad.tweeen = score.tweeen;
                 break;
-            case 3:
+            case '3':
                 scoreblad.drieen = score.drieen;
                 break;
-            case 4:
+            case '4':
                 scoreblad.vieren = score.vieren;
                 break;
-            case 5:
+            case '5':
                 scoreblad.vijfen = score.vijfen;
                 break;
-            case 6:
+            case '6':
                 scoreblad.zessen = score.zessen;
                 break;
-            case 7:
+            case 't':
                 scoreblad.threeOfAKind = score.threeOfAKind;
                 break;
-            case 8:
+            case 'c':
                 scoreblad.carre = score.carre;
                 break;
-            case 9:
+            case 'f':
                 scoreblad.fullHouse = score.fullHouse;
                 break;
-            case 10:
+            case 'k':
                 scoreblad.kleineStraat = score.kleineStraat;
                 break;
-            case 11:
+            case 'g':
                 scoreblad.groteStraat = score.groteStraat;
                 break;
-            case 12:
+            case 'y':
                 scoreblad.yahtzee = score.yahtzee;
                 break;
-            case 13:
+            case 'z':
                 scoreblad.chance = score.chance;
                 break;
             default:
@@ -124,15 +142,30 @@ public class Speler {
 
         // toon score laatste worp
         System.out.printf("\nScore laatse worp:\n");
-        score.toonScoreWorp(dobbelstenen.getWorp());
+        score.berekenScoreWorp(dobbelstenen.getWorp());
 
-        // toon scoreblad
-        System.out.printf("\nScoreblad van %s:\n",naam);
-        scoreblad.toonScore();
-
-        // kies welke score overgezet moet worden naar scoreblad
+        toonScoreblad(scoreblad, score);
         noteerScore(score, scoreblad);
-        scoreblad.toonScore();
+    }
+
+    void toonScoreblad(Scoreblad scoreblad, Score score) {
+        System.out.printf("\n Scoreblad van speler: %s\n", naam);
+        System.out.printf("%20s | %20s | %20s | %20s\n", " ", "------ score -------", "--- laatste worp ---", "--- kies welke worp je wilt noteren ---");
+        System.out.printf("");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "enen", scoreblad.enen == -1 ? "" : scoreblad.enen, score.enen, scoreblad.enen == -1 ? "(1)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "tweeen", scoreblad.tweeen == -1 ? "" : scoreblad.tweeen, score.tweeen, scoreblad.tweeen == -1 ? "(2)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "drieen", scoreblad.drieen == -1 ? "" : scoreblad.drieen, score.drieen, scoreblad.drieen == -1 ? "(3)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "vieren", scoreblad.vieren == -1 ? "" : scoreblad.vieren, score.vieren, scoreblad.vieren == -1 ? "(4)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "vijfen", scoreblad.vijfen == -1 ? "" : scoreblad.vijfen, score.vijfen, scoreblad.vijfen == -1 ? "(5)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "zessen", scoreblad.zessen == -1 ? "" : scoreblad.zessen, score.zessen, scoreblad.zessen == -1 ? "(6)" : "");
+
+        System.out.printf("%20s | %20s | %20s | %20s\n", "three of a kind", scoreblad.threeOfAKind == -1 ? "" : scoreblad.threeOfAKind, score.threeOfAKind, scoreblad.threeOfAKind == -1 ? "(T)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "carré", scoreblad.carre == -1 ? "" : scoreblad.carre, score.carre, scoreblad.carre == -1 ? "(C)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "full house", scoreblad.fullHouse == -1 ? "" : scoreblad.fullHouse, score.fullHouse, scoreblad.fullHouse == -1 ? "(F)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "kleine straat", scoreblad.kleineStraat == -1 ? "" : scoreblad.kleineStraat, score.kleineStraat, scoreblad.kleineStraat == -1 ? "(K)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "grote straat", scoreblad.groteStraat == -1 ? "" : scoreblad.groteStraat, score.groteStraat, scoreblad.groteStraat == -1 ? "(G)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "yahtzee", scoreblad.yahtzee == -1 ? "" : scoreblad.yahtzee, score.yahtzee, scoreblad.yahtzee == -1 ? "(Y)" : "");
+        System.out.printf("%20s | %20s | %20s | %20s\n", "chance", scoreblad.chance == -1 ? "" : scoreblad.chance, score.chance, scoreblad.chance == -1 ? "(Z)" : "");
 
     }
 

@@ -14,13 +14,13 @@ public class Spel {
         // definieer spelers
         spel.maakSpelers();
 
-        do {
+        for (int ronde = 1; ronde <= 13; ronde++) {
             for (Speler speler : spel.spelers) {
                 System.out.println("---------------------------------------------------");
                 System.out.println("Speler: " + speler.getNaam() + " is nu aan de beurt");
                 speler.speelBeurt(spel.dobbelstenen);
             }
-        } while (true);
+        }
 
     } // main
 

@@ -17,23 +17,25 @@ public class Score {
     int yahtzee;
     int chance;
 
-    int yahtzeeBonus;
-
     void reset() {
-        enen = 0;
-        tweeen = 0;
-        drieen = 0;
-        vieren = 0;
-        vijfen = 0;
-        zessen = 0;
+        reset(0);
+    }
 
-        threeOfAKind = 0;
-        carre = 0;
-        fullHouse = 0;
-        kleineStraat = 0;
-        groteStraat = 0;
-        yahtzee = 0;
-        chance = 0;
+    void reset(int startWaarde) {
+        enen = startWaarde;
+        tweeen = startWaarde;
+        drieen = startWaarde;
+        vieren = startWaarde;
+        vijfen = startWaarde;
+        zessen = startWaarde;
+
+        threeOfAKind = startWaarde;
+        carre = startWaarde;
+        fullHouse = startWaarde;
+        kleineStraat = startWaarde;
+        groteStraat = startWaarde;
+        yahtzee = startWaarde;
+        chance = startWaarde;
     }
 
     void toonScoreWorp(String worp) {
@@ -65,7 +67,7 @@ public class Score {
                 "(11) grote straat:", groteStraat, "(12) yahtzee:", yahtzee, "(13) chance:", chance);
     }
 
-    private void berekenScoreWorp(String worp) {
+     void berekenScoreWorp(String worp) {
 
         int[] value2freq = new int[7]; // uses indexes 0..6 ; poor man's map ;-)
         // bereken boven
