@@ -19,7 +19,7 @@ public class Scoreblad extends Score {
     }
 
     // bereken alle (sub) totaliseringen
-    void bereken() {
+    void totaliseer() {
 
         subtotaalBoven = enen + tweeen + drieen + vieren + vijfen + zessen;
         bonusBoven = subtotaalBoven >= 63 ? 35 : 0;
@@ -27,6 +27,7 @@ public class Scoreblad extends Score {
 
         totaalOnder = threeOfAKind + carre + fullHouse + kleineStraat + groteStraat + yahtzee + chance;
         totaalGeneraal = totaalBoven + totaalOnder;
+
     }
 
 

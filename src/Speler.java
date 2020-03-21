@@ -63,7 +63,7 @@ public class Speler {
         return naam;
     }
 
-    void noteerScore(Score score, Scoreblad scoreblad) { //todo: only allow assignments to 0 fields
+    void noteerScore(Score score, Scoreblad scoreblad) {
 
         Scanner input = new Scanner(System.in);
         System.out.printf("\nKies welke worp je wilt noteren: ");

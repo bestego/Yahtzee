@@ -14,13 +14,32 @@ public class Spel {
         // definieer spelers
         spel.maakSpelers();
 
+        // speel spel
         for (int ronde = 1; ronde <= 13; ronde++) {
             for (Speler speler : spel.spelers) {
                 System.out.println("---------------------------------------------------");
                 System.out.println("Speler: " + speler.getNaam() + " is nu aan de beurt");
                 speler.speelBeurt(spel.dobbelstenen);
+                if ( ronde == 13) speler.scoreblad.totaliseer();
             }
         }
+
+        // bepaal winnaar
+        Speler winnaar = null;
+        int hoogsteScore = 0;
+        for (Speler speler : spel.spelers) {
+            int totaal = speler.scoreblad.totaalGeneraal;
+            System.out.println("=============================================");
+            System.out.printf("%s heeft %d punten\n", speler.getNaam(),speler.scoreblad.totaalGeneraal);
+            if ( totaal > hoogsteScore) {
+                hoogsteScore = totaal;
+                winnaar = speler;
+            }
+        }
+        System.out.printf("\n DE WINNAAR IS: %s\n",winnaar.getNaam());
+
+
+
 
     } // main
 
