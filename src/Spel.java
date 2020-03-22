@@ -15,30 +15,30 @@ public class Spel {
         spel.maakSpelers();
 
         // speel spel
-        for (int ronde = 1; ronde <= 13; ronde++) {
-            for (Speler speler : spel.spelers) {
+        int aantalBeurten = 3;
+        for (int beurt = 1; beurt <= aantalBeurten; beurt++) {
+            for (Speler speler : spel.spelers) { //todo: make multi column output for all players
                 System.out.println("---------------------------------------------------");
                 System.out.println("Speler: " + speler.getNaam() + " is nu aan de beurt");
                 speler.speelBeurt(spel.dobbelstenen);
-                if ( ronde == 13) speler.scoreblad.totaliseer();
+                if (beurt == aantalBeurten) speler.scoreblad.totaliseer();
             }
         }
 
         // bepaal winnaar
         Speler winnaar = null;
         int hoogsteScore = 0;
+        System.out.println("===== UITSLAG ====="); //todo: behandel gelijkspel situatie
         for (Speler speler : spel.spelers) {
-            int totaal = speler.scoreblad.totaalGeneraal;
-            System.out.println("=============================================");
-            System.out.printf("%s heeft %d punten\n", speler.getNaam(),speler.scoreblad.totaalGeneraal);
-            if ( totaal > hoogsteScore) {
+//            int totaal = speler.scoreblad.totaalGeneraal;
+            int totaal = speler.scoreblad.categorie.get(Categorie.totaalGeneraal);
+            System.out.printf("%s heeft %d punten\n", speler.getNaam(), totaal);
+            if (totaal > hoogsteScore) {
                 hoogsteScore = totaal;
                 winnaar = speler;
             }
         }
-        System.out.printf("\n DE WINNAAR IS: %s\n",winnaar.getNaam());
-
-
+        System.out.printf("\n DE WINNAAR IS: %s\n", winnaar.getNaam());
 
 
     } // main
@@ -59,5 +59,13 @@ public class Spel {
         }
         System.out.println();
     }
+
+//    private void toonUitslag(ArrayList<Speler> spelersLijst) {
+//        String line = String.format("%20s |", "enen");
+//        for (Speler speler : spelersLijst) {
+//            line = line + String.format(" %20s |", speler.scoreblad.enen);
+//        }
+//        System.out.println(line);
+//    }
 
 }
