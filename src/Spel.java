@@ -15,30 +15,32 @@ public class Spel {
         spel.maakSpelers();
 
         // speel spel
-        int aantalBeurten = 3;
+        int aantalBeurten = 1;
         for (int beurt = 1; beurt <= aantalBeurten; beurt++) {
-            for (Speler speler : spel.spelers) { //todo: make multi column output for all players
+            for (Speler speler : spel.spelers) {
                 System.out.println("---------------------------------------------------");
                 System.out.println("Speler: " + speler.getNaam() + " is nu aan de beurt");
                 speler.speelBeurt(spel.dobbelstenen);
                 if (beurt == aantalBeurten) speler.scoreblad.totaliseer();
             }
         }
+        
+        spel.toonUitslag(spel.spelers);
 
-        // bepaal winnaar
-        Speler winnaar = null;
-        int hoogsteScore = 0;
-        System.out.println("===== UITSLAG ====="); //todo: behandel gelijkspel situatie
-        for (Speler speler : spel.spelers) {
-//            int totaal = speler.scoreblad.totaalGeneraal;
-            int totaal = speler.scoreblad.categorie.get(Categorie.totaalGeneraal);
-            System.out.printf("%s heeft %d punten\n", speler.getNaam(), totaal);
-            if (totaal > hoogsteScore) {
-                hoogsteScore = totaal;
-                winnaar = speler;
-            }
-        }
-        System.out.printf("\n DE WINNAAR IS: %s\n", winnaar.getNaam());
+//        // bepaal winnaar
+//        Speler winnaar = null;
+//        int hoogsteScore = 0;
+//        System.out.println("===== UITSLAG =====");
+//        for (Speler speler : spel.spelers) {
+////            int totaal = speler.scoreblad.totaalGeneraal;
+//            int totaal = speler.scoreblad.categorie.get(Categorie.totaalGeneraal);
+//            System.out.printf("%s heeft %d punten\n", speler.getNaam(), totaal);
+//            if (totaal > hoogsteScore) {
+//                hoogsteScore = totaal;
+//                winnaar = speler;
+//            }
+//        }
+//        System.out.printf("\n DE WINNAAR IS: %s\n", winnaar.getNaam());
 
 
     } // main
@@ -60,12 +62,20 @@ public class Spel {
         System.out.println();
     }
 
-//    private void toonUitslag(ArrayList<Speler> spelersLijst) {
-//        String line = String.format("%20s |", "enen");
-//        for (Speler speler : spelersLijst) {
-//            line = line + String.format(" %20s |", speler.scoreblad.enen);
-//        }
-//        System.out.println(line);
-//    }
+    private void toonUitslag(ArrayList<Speler> spelersLijst) {
+        String buffer = String.format("%20s |","------ speler(s) -->");
+        for (Speler speler : spelersLijst) {
+            buffer += String.format("%20s |", speler.getNaam());
+        }
+        System.out.println(buffer);
+        for (SleutelWaarde sw : spelersLijst.get(0).score.categorie) {
+            if ( sw.sleutel.equals(Categorie.subtotaalBoven)) System.out.println();
+             buffer = String.format("%20s |", sw.sleutel);
+            for (Speler speler : spelersLijst) {
+                buffer += String.format("%20s |", speler.scoreblad.categorie.get(sw.sleutel));
+            }
+            System.out.println(buffer);
+        }
+    }
 
 }

@@ -15,9 +15,7 @@ public class Score2 {
         categorie.add(new SleutelWaarde(Categorie.vieren, startWaarde, '4'));
         categorie.add(new SleutelWaarde(Categorie.vijfen, startWaarde, '5'));
         categorie.add(new SleutelWaarde(Categorie.zessen, startWaarde, '6'));
-        categorie.add(new SleutelWaarde(Categorie.subtotaalBoven, startWaarde));
-        categorie.add(new SleutelWaarde(Categorie.bonusBoven, startWaarde));
-        categorie.add(new SleutelWaarde(Categorie.totaalBoven, startWaarde));
+
 
         categorie.add(new SleutelWaarde(Categorie.threeOfAKind, startWaarde, 't'));
         categorie.add(new SleutelWaarde(Categorie.carre, startWaarde, 'c'));
@@ -26,9 +24,13 @@ public class Score2 {
         categorie.add(new SleutelWaarde(Categorie.groteStraat, startWaarde, 'g'));
         categorie.add(new SleutelWaarde(Categorie.yahtzee, startWaarde, 'y'));
         categorie.add(new SleutelWaarde(Categorie.chance, startWaarde, 'z'));
-        categorie.add(new SleutelWaarde(Categorie.yahtzeeBonus, startWaarde));
-        categorie.add(new SleutelWaarde(Categorie.totaalOnder, startWaarde));
-        categorie.add(new SleutelWaarde(Categorie.totaalGeneraal, startWaarde));
+
+        categorie.add(new SleutelWaarde(Categorie.subtotaalBoven, 0));
+        categorie.add(new SleutelWaarde(Categorie.bonusBoven, 0));
+        categorie.add(new SleutelWaarde(Categorie.totaalBoven, 0));
+        categorie.add(new SleutelWaarde(Categorie.yahtzeeBonus, 0));
+        categorie.add(new SleutelWaarde(Categorie.totaalOnder, 0));
+        categorie.add(new SleutelWaarde(Categorie.totaalGeneraal, 0));
     }
 
     void reset() {
