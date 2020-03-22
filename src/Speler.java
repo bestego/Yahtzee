@@ -7,7 +7,7 @@ public class Speler {
     Score2 score = new Score2(0);
     Score2 scoreblad = new Score2(-1);
     private String naam;
-    
+
     Speler(String naam) {
         this.naam = naam;
     }
@@ -187,7 +187,8 @@ public class Speler {
         System.out.printf("\n Scoreblad van speler: %s\n", naam);
         System.out.printf("%20s | %20s | %20s | %20s\n", " ", "------ score -------", "--- laatste worp ---", "--- kies welke worp je wilt noteren ---");
         for (SleutelWaarde sw : scoreblad.categorie) {
-            System.out.printf("%20s | %20s | %20s | %20s\n", sw.sleutel, sw.waarde == -1 ? "" : sw.waarde, score.categorie.get(sw.sleutel), sw.waarde == -1 ? sw.toets : "");
+            if (sw.sleutel.toLowerCase().matches(".*totaal.*") || sw.sleutel.matches(Categorie.bonusBoven)) continue;
+            System.out.printf("%20s | %20s | %20s | %8s\n", sw.sleutel, sw.waarde == -1 ? "" : sw.waarde, score.categorie.get(sw.sleutel), sw.waarde == -1 ? (sw.toets == 0?"": "("+sw.toets+")") : "");
         }
     }
 
