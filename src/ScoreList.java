@@ -17,15 +17,27 @@ public class ScoreList extends ArrayList<SleutelWaarde> {
         return null;
     }
 
+    boolean isGenoteerd(String sleutel) {
+        for (SleutelWaarde sw : this) {
+            if (sw.sleutel.equals(sleutel)) {
+                return sw.genoteerd;
+            }
+        }
+        return false;
+    }
+
     boolean put(String sleutel, int waarde) {
         for (SleutelWaarde sw : this) {
             if (sw.sleutel.equals(sleutel)) {
                 sw.waarde = waarde;
+                sw.genoteerd = true;
                 return true;
             }
         }
         return false;
     }
+
+
 
     public String toString() {
         String line = "";

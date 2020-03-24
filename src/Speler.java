@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Speler {
 
 
-    Score2 score = new Score2(0);
-    Score2 scoreblad = new Score2(-1);
+    Score2 score = new Score2();
+    Score2 scoreblad = new Score2();
     private String naam;
 
     Speler(String naam) {
@@ -42,8 +42,8 @@ public class Speler {
         // maak lijst van nog niet-gescoorde items
         ArrayList<Character> validList = new ArrayList<>();
 
-        for (SleutelWaarde sw : scoreblad.categorie) {
-            if (sw.toets != 0 && sw.waarde == -1) validList.add(sw.toets);
+        for (SleutelWaarde sw : scoreblad.item) {
+            if (sw.toets != 0 && !sw.genoteerd) validList.add(sw.toets);
         }
 
         return validList.indexOf(letter.toLowerCase().charAt(0)) >= 0 ? true : false;
@@ -117,6 +117,16 @@ public class Speler {
 
     void noteerScore2(Score2 score, Score2 scoreblad) {
 
+        if (score.item.get(Categorie.yahtzee) != 0 ) {
+            System.out.printf("\nJe hebt YAHTZEE :-)\n");
+            if ( scoreblad.item.get(Categorie.yahtzee) < 50 ) {
+                scoreblad.item.put(Categorie.yahtzee, 50);
+            } else {
+                scoreblad.item.put(Categorie.yahtzeeBonus, scoreblad.item.get(Categorie.yahtzeeBonus)+100);
+            }
+            return;
+        }
+
         Scanner input = new Scanner(System.in);
         System.out.printf("\nKies welke worp je wilt noteren: ");
         String line;
@@ -131,9 +141,9 @@ public class Speler {
         } while (keuze == '-');
 
         // kopieer gekozen waarde naar scoreblad
-        for (SleutelWaarde sw : scoreblad.categorie) {
+        for (SleutelWaarde sw : scoreblad.item) {
             if (keuze == sw.toets) {
-                scoreblad.categorie.put(sw.sleutel, score.categorie.get(sw.sleutel));
+                scoreblad.item.put(sw.sleutel, score.item.get(sw.sleutel));
                 break;
             }
         }
@@ -186,9 +196,9 @@ public class Speler {
     void toonScoreblad2(Score2 scoreblad, Score2 score) {
         System.out.printf("\n Scoreblad van speler: %s\n", naam);
         System.out.printf("%20s | %20s | %20s | %20s\n", " ", "------ score -------", "--- laatste worp ---", "--- kies welke worp je wilt noteren ---");
-        for (SleutelWaarde sw : scoreblad.categorie) {
+        for (SleutelWaarde sw : scoreblad.item) {
             if (sw.sleutel.toLowerCase().matches(".*totaal.*") || sw.sleutel.matches(Categorie.bonusBoven)) continue;
-            System.out.printf("%20s | %20s | %20s | %8s\n", sw.sleutel, sw.waarde == -1 ? "" : sw.waarde, score.categorie.get(sw.sleutel), sw.waarde == -1 ? (sw.toets == 0?"": "("+sw.toets+")") : "");
+            System.out.printf("%20s | %20s | %20s | %8s\n", sw.sleutel, sw.genoteerd ? sw.waarde : "", score.item.get(sw.sleutel), sw.genoteerd ? "": (sw.toets == 0?"": "("+sw.toets+")"));
         }
     }
 

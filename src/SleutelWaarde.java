@@ -4,6 +4,8 @@ public class SleutelWaarde {
     public String sleutel;
     public int waarde;
     public char toets;
+    public boolean genoteerd = false;
+    // todo: add field waardeIsSet; add setters/getters; this avoid initialization -1; make fields private
 
     SleutelWaarde(String sleutel, int waarde){
         this.sleutel = sleutel;

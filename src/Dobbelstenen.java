@@ -45,6 +45,7 @@ public class Dobbelstenen {
             }
         }
         worp = worpen;
+        //worp = "66666";
         return worpen;
     }
 

@@ -15,7 +15,7 @@ public class Spel {
         spel.maakSpelers();
 
         // speel spel
-        int aantalBeurten = 1;
+        int aantalBeurten = 3;
         for (int beurt = 1; beurt <= aantalBeurten; beurt++) {
             for (Speler speler : spel.spelers) {
                 System.out.println("---------------------------------------------------");
@@ -68,11 +68,11 @@ public class Spel {
             buffer += String.format("%20s |", speler.getNaam());
         }
         System.out.println(buffer);
-        for (SleutelWaarde sw : spelersLijst.get(0).score.categorie) {
+        for (SleutelWaarde sw : spelersLijst.get(0).score.item) {
             if ( sw.sleutel.equals(Categorie.subtotaalBoven)) System.out.println();
              buffer = String.format("%20s |", sw.sleutel);
             for (Speler speler : spelersLijst) {
-                buffer += String.format("%20s |", speler.scoreblad.categorie.get(sw.sleutel));
+                buffer += String.format("%20s |", speler.scoreblad.item.get(sw.sleutel));
             }
             System.out.println(buffer);
         }

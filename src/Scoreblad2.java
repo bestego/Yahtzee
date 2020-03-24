@@ -3,25 +3,25 @@ public class Scoreblad2 extends Score2 { // todo: remove this class
     int resetWaarde = -1;
 
     Scoreblad2() {
-        reset(-1);
+        reset();
     }
 
     @Override
     void reset() {
-        reset(-1);
+        reset();
     }
 
     // bereken alle (sub) totaliseringen
     void totaliseer() {
 
-        categorie.put(Categorie.subtotaalBoven, categorie.get(Categorie.enen) + categorie.get(Categorie.tweeen) + categorie.get(Categorie.drieen) +
-                categorie.get(Categorie.vieren) + categorie.get(Categorie.vijfen) + categorie.get(Categorie.zessen));
-        categorie.put(Categorie.bonusBoven, categorie.get(Categorie.subtotaalBoven) >= 63 ? 35 : 0);
-        categorie.put(Categorie.totaalBoven, categorie.get(Categorie.subtotaalBoven) + categorie.get(Categorie.bonusBoven));
+        item.put(Categorie.subtotaalBoven, item.get(Categorie.enen) + item.get(Categorie.tweeen) + item.get(Categorie.drieen) +
+                item.get(Categorie.vieren) + item.get(Categorie.vijfen) + item.get(Categorie.zessen));
+        item.put(Categorie.bonusBoven, item.get(Categorie.subtotaalBoven) >= 63 ? 35 : 0);
+        item.put(Categorie.totaalBoven, item.get(Categorie.subtotaalBoven) + item.get(Categorie.bonusBoven));
 
-        categorie.put(Categorie.totaalOnder, categorie.get(Categorie.threeOfAKind) + categorie.get(Categorie.carre) + categorie.get(Categorie.fullHouse) +
-                categorie.get(Categorie.kleineStraat) + categorie.get(Categorie.groteStraat) + categorie.get(Categorie.yahtzee) + categorie.get(Categorie.chance) + categorie.get(Categorie.yahtzeeBonus));
-        categorie.put(Categorie.totaalGeneraal, categorie.get(Categorie.totaalBoven) + categorie.get(Categorie.totaalOnder));
+        item.put(Categorie.totaalOnder, item.get(Categorie.threeOfAKind) + item.get(Categorie.carre) + item.get(Categorie.fullHouse) +
+                item.get(Categorie.kleineStraat) + item.get(Categorie.groteStraat) + item.get(Categorie.yahtzee) + item.get(Categorie.chance) + item.get(Categorie.yahtzeeBonus));
+        item.put(Categorie.totaalGeneraal, item.get(Categorie.totaalBoven) + item.get(Categorie.totaalOnder));
     }
 
 }
