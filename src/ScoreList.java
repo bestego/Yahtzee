@@ -37,8 +37,6 @@ public class ScoreList extends ArrayList<SleutelWaarde> {
         return false;
     }
 
-
-
     public String toString() {
         String line = "";
         for (SleutelWaarde sw : this) {

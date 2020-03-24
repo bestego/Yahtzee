@@ -24,24 +24,8 @@ public class Spel {
                 if (beurt == aantalBeurten) speler.scoreblad.totaliseer();
             }
         }
-        
+
         spel.toonUitslag(spel.spelers);
-
-//        // bepaal winnaar
-//        Speler winnaar = null;
-//        int hoogsteScore = 0;
-//        System.out.println("===== UITSLAG =====");
-//        for (Speler speler : spel.spelers) {
-////            int totaal = speler.scoreblad.totaalGeneraal;
-//            int totaal = speler.scoreblad.categorie.get(Categorie.totaalGeneraal);
-//            System.out.printf("%s heeft %d punten\n", speler.getNaam(), totaal);
-//            if (totaal > hoogsteScore) {
-//                hoogsteScore = totaal;
-//                winnaar = speler;
-//            }
-//        }
-//        System.out.printf("\n DE WINNAAR IS: %s\n", winnaar.getNaam());
-
 
     } // main
 
