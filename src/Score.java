@@ -2,120 +2,92 @@ import java.util.Arrays;
 
 public class Score {
 
-    int enen;
-    int tweeen;
-    int drieen;
-    int vieren;
-    int vijfen;
-    int zessen;
+    final ScoreList item = new ScoreList();
 
-    int threeOfAKind;
-    int carre;
-    int fullHouse;
-    int kleineStraat;
-    int groteStraat;
-    int yahtzee;
-    int chance;
+    Score() {
+        item.add(new SleutelWaarde(Categorie.enen, 0, '1'));
+        item.add(new SleutelWaarde(Categorie.tweeen, 0, '2'));
+        item.add(new SleutelWaarde(Categorie.drieen, 0, '3'));
+        item.add(new SleutelWaarde(Categorie.vieren, 0, '4'));
+        item.add(new SleutelWaarde(Categorie.vijfen, 0, '5'));
+        item.add(new SleutelWaarde(Categorie.zessen, 0, '6'));
+
+
+        item.add(new SleutelWaarde(Categorie.threeOfAKind, 0, 't'));
+        item.add(new SleutelWaarde(Categorie.carre, 0, 'c'));
+        item.add(new SleutelWaarde(Categorie.fullHouse, 0, 'f'));
+        item.add(new SleutelWaarde(Categorie.kleineStraat, 0, 'k'));
+        item.add(new SleutelWaarde(Categorie.groteStraat, 0, 'g'));
+        item.add(new SleutelWaarde(Categorie.yahtzee, 0, 'y'));
+        item.add(new SleutelWaarde(Categorie.chance, 0, 'z'));
+
+        item.add(new SleutelWaarde(Categorie.subtotaalBoven, 0));
+        item.add(new SleutelWaarde(Categorie.bonusBoven, 0));
+        item.add(new SleutelWaarde(Categorie.totaalBoven, 0));
+        item.add(new SleutelWaarde(Categorie.yahtzeeBonus, 0));
+        item.add(new SleutelWaarde(Categorie.totaalOnder, 0));
+        item.add(new SleutelWaarde(Categorie.totaalGeneraal, 0));
+    }
 
     void reset() {
-        reset(0);
+        for (SleutelWaarde item : item) {
+            item.waarde = 0;
+            item.genoteerd = false;
+        }
     }
 
-    void reset(int startWaarde) {
-        enen = startWaarde;
-        tweeen = startWaarde;
-        drieen = startWaarde;
-        vieren = startWaarde;
-        vijfen = startWaarde;
-        zessen = startWaarde;
-
-        threeOfAKind = startWaarde;
-        carre = startWaarde;
-        fullHouse = startWaarde;
-        kleineStraat = startWaarde;
-        groteStraat = startWaarde;
-        yahtzee = startWaarde;
-        chance = startWaarde;
-    }
-
-    void toonScoreWorp(String worp) {
-        berekenScoreWorp(worp);
-        toonScore();
-    }
-
-    void toonScore() {
-
-//        System.out.println("(1) enen: " + enen);
-//        System.out.println("(2) tweeen: " + tweeen);
-//        System.out.println("(3) drieen: " + drieen);
-//        System.out.println("(4) vieren: " + vieren);
-//        System.out.println("(5) vijfen: " + vijfen);
-//        System.out.println("(6) zessen: " + zessen);
-//        System.out.println("---------------------------");
-//        System.out.println("(7) three of a kind: " + threeOfAKind);
-//        System.out.println("(8) carré: " + carre);
-//        System.out.println("(9) full house: " + fullHouse);
-//        System.out.println("(10) kleine straat: " + kleineStraat);
-//        System.out.println("(11) grote straat: " + groteStraat);
-//        System.out.println("(12) yahtzee: " + yahtzee);
-//        System.out.println("(13) chance: " + chance);
-
-        System.out.printf("%20s %2s |%20s %2s |%20s %2s |%20s %2s |%20s %2s |%20s %2s |\n",
-                "(1) enen:", enen, "(2) tweeen:", tweeen, "(3) drieen:", drieen, "(4) vieren:", vieren, "(5) vijfen:", vijfen, "(6) zessen:", zessen);
-        System.out.printf("%20s %2s |%20s %2s |%20s %2s |%20s %2s |%20s %2s |%20s %2s |%20s %2s\n",
-                "(7) three of a kind:", threeOfAKind, "(8) carré:", carre, "(9) full house:", fullHouse, "(10) kleine straat:", kleineStraat,
-                "(11) grote straat:", groteStraat, "(12) yahtzee:", yahtzee, "(13) chance:", chance);
-    }
-
-     void berekenScoreWorp(String worp) {
+    void berekenScoreWorp(String worp) {
 
         int[] value2freq = new int[7]; // uses indexes 0..6 ; poor man's map ;-)
         // bereken boven
         for (char c : worp.toCharArray()) {
             switch (c) {
                 case '1':
-                    enen += 1;
+                    item.put(Categorie.enen, item.get(Categorie.enen) + 1);
                     value2freq[1]++;
                     break;
                 case '2':
-                    tweeen += 2;
+                    item.put(Categorie.tweeen, item.get(Categorie.tweeen) + 2);
                     value2freq[2]++;
                     break;
                 case '3':
-                    drieen += 3;
+                    item.put(Categorie.drieen, item.get(Categorie.drieen) + 3);
                     value2freq[3]++;
                     break;
                 case '4':
-                    vieren += 4;
+                    item.put(Categorie.vieren, item.get(Categorie.vieren) + 4);
                     value2freq[4]++;
                     break;
                 case '5':
-                    vijfen += 5;
+                    item.put(Categorie.vijfen, item.get(Categorie.vijfen) + 5);
                     value2freq[5]++;
                     break;
                 case '6':
-                    zessen += 6;
+                    item.put(Categorie.zessen, item.get(Categorie.zessen) + 6);
                     value2freq[6]++;
                     break;
             }
         }
 
-        int worpTotaal = enen + tweeen + drieen + vieren + vijfen + zessen;
+        int worpTotaal = 0;
+        for (int d = 0; d < worp.length(); d++) {
+            worpTotaal += Character.getNumericValue(worp.charAt(d));
+        }
 
         // three of a kind
-        if (dezelfde(value2freq, 3) > 0) threeOfAKind = worpTotaal;
+        if (dezelfde(value2freq, 3) > 0) item.put(Categorie.threeOfAKind, worpTotaal);
         // carre
-        if (dezelfde(value2freq, 4) > 0) carre = worpTotaal;
+        if (dezelfde(value2freq, 4) > 0) item.put(Categorie.carre, worpTotaal);
         // full house
-        if (dezelfde(value2freq, 2) > 0 && dezelfde(value2freq, 3) > 0) fullHouse = 25;
+        if (dezelfde(value2freq, 2) > 0 && dezelfde(value2freq, 3) > 0) item.put(Categorie.fullHouse, 25);
         // kleine straat
-        if (opeenvolgend(worp, 4)) kleineStraat = 30;
+        if (opeenvolgend(worp, 4)) item.put(Categorie.kleineStraat, 30);
         // grote straat
-        if (opeenvolgend(worp, 5)) kleineStraat = 50;
+        if (opeenvolgend(worp, 5)) item.put(Categorie.kleineStraat, 50);
         // yahtzee
-        if (dezelfde(value2freq, 5) > 0) yahtzee = 50; //todo: yatzee bonus toevoegen
+        if (dezelfde(value2freq, 5) > 0) item.put(Categorie.yahtzee, 50);
         // chance
-        chance = worpTotaal;
+        item.put(Categorie.chance, worpTotaal);
     }
 
     /**
@@ -151,6 +123,19 @@ public class Score {
             pos++;
         }
         return match;
+    }
+
+    // bereken alle (sub) totaliseringen
+    void totaliseer() {
+
+        item.put(Categorie.subtotaalBoven, item.get(Categorie.enen) + item.get(Categorie.tweeen) + item.get(Categorie.drieen) +
+                item.get(Categorie.vieren) + item.get(Categorie.vijfen) + item.get(Categorie.zessen));
+        item.put(Categorie.bonusBoven, item.get(Categorie.subtotaalBoven) >= 63 ? 35 : 0);
+        item.put(Categorie.totaalBoven, item.get(Categorie.subtotaalBoven) + item.get(Categorie.bonusBoven));
+
+        item.put(Categorie.totaalOnder, item.get(Categorie.threeOfAKind) + item.get(Categorie.carre) + item.get(Categorie.fullHouse) +
+                item.get(Categorie.kleineStraat) + item.get(Categorie.groteStraat) + item.get(Categorie.yahtzee) + item.get(Categorie.chance) + item.get(Categorie.yahtzeeBonus));
+        item.put(Categorie.totaalGeneraal, item.get(Categorie.totaalBoven) + item.get(Categorie.totaalOnder));
     }
 
 } // Score
