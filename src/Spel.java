@@ -15,7 +15,7 @@ public class Spel {
         spel.maakSpelers();
 
         // speel spel
-        int aantalBeurten = 3;
+        int aantalBeurten = 13;
         for (int beurt = 1; beurt <= aantalBeurten; beurt++) {
             for (Speler speler : spel.spelers) {
                 System.out.println("---------------------------------------------------");
