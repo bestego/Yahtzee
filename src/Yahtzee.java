@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Yahtzee game limited to use of 'OCA functionality'
+ */
 public class Yahtzee {
 
     ArrayList<Speler> spelers = new ArrayList<>();
