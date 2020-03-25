@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Spel {
+public class Yahtzee {
 
     ArrayList<Speler> spelers = new ArrayList<>();
     Dobbelstenen dobbelstenen = new Dobbelstenen(5);
@@ -9,7 +9,7 @@ public class Spel {
     public static void main(String[] args) {
 
         // creeer benodigde objecten
-        Spel spel = new Spel();
+        Yahtzee spel = new Yahtzee();
 
         // definieer spelers
         spel.maakSpelers();
