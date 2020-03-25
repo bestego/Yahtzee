@@ -118,7 +118,7 @@ public class Speler {
     int welkeVasthouden() {
         Scanner input = new Scanner(System.in);
 
-        System.out.printf("\tWelke dobbelstenen wil je vasthouden? ( 0 = geen)\n");
+        System.out.printf("\tWelke dobbelstenen wil je vasthouden? ( bijv. 15 betekent dobbelstenen 1 en 5; 0 = geen)\n");
         boolean isInvoerJuist;
         String line;
 

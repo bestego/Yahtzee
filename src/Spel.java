@@ -31,14 +31,18 @@ public class Spel {
 
     private void maakSpelers() {
         Scanner input = new Scanner(System.in);
-        while (true) {
-            System.out.println("Voer naam in van speler: " + (spelers.size() + 1) + " (geen naam om te stoppen)");
+        do {
+            System.out.println("Voer naam in van speler: " + (spelers.size() + 1) + " (geen naam om verder te gaan)");
             String naam = input.nextLine();
             if (naam.length() == 0) {
-                break;
+                if (spelers.size() == 0) {
+                    continue;
+                } else {
+                    break;
+                }
             }
             spelers.add(new Speler(naam));
-        }
+        } while (true);
         System.out.print("Spelers zijn: ");
         for (Speler s : spelers) {
             System.out.print(s.getNaam() + " ");
